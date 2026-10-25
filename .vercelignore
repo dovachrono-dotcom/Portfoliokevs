@@ -5,3 +5,6 @@ source/
 .vscode/
 .next/
 node_modules/
+.env*
+.git/
+.vercel/
