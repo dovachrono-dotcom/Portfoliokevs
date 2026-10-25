@@ -2,6 +2,8 @@
 
 Personal portfolio built with Next.js, React, TypeScript and Tailwind CSS. It includes Home, About, Projects, Contact and Blog pages, light/dark themes, photos/videos and a downloadable CV.
 
+Live website: [portfoliokevs.vercel.app](https://portfoliokevs.vercel.app). Source: [dovachrono-dotcom/Portfoliokevs](https://github.com/dovachrono-dotcom/Portfoliokevs).
+
 ## Open in VS Code
 
 Open **`ITelecnaha`**, the folder containing `package.json`, `app`, `components`, `lib` and this README. Open this inner project rather than its parent `Portfolio enhance`, which has a separate Git repository.
@@ -270,6 +272,8 @@ Use a fresh branch name for each update. Then edit, check, commit and push as ab
 ### Update the live website
 
 Open a pull request from your pushed branch into `main`, review it, and merge when ready. Check Vercel's production-branch setting: production updates from the branch that project is configured to deploy. A feature-branch push may create a preview deployment rather than update the live site.
+
+This project's Vercel account is `dovachrono-1203`, project `portfoliokevs`, linked to this GitHub repository. `vercel.json` explicitly selects Next.js. See [deployment notes](docs/deployment.md) for the live URL and the manual deployment fallback.
 
 This guide does not run any push, merge or deployment for you.
 
