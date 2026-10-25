@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import styles from './not-found.module.css';
 
 export default function NotFound() {
@@ -50,7 +51,7 @@ export default function NotFound() {
         </button>
         <h1 className={styles.nfTitle}>404 – Page Not Found</h1>
         <p className={styles.nfText}>Oops !Nasaag kas multiverse bai</p>
-        <a href="/" className={styles.nfHomeButton}>← Go Home</a>
+        <Link href="/" className={styles.nfHomeButton}>← Go Home</Link>
       </div>
     </div>
   );

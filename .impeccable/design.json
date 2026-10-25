@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T00:00:00+08:00",
+  "title": "Design System: Kevin Mercado Portfolio",
+  "extensions": {
+    "motion": [
+      {
+        "name": "studio-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Visible hero entry, project fan, and two-photo theme transitions."
+      },
+      {
+        "name": "portrait",
+        "value": "opacity 1500ms; transform 1800ms; theme colors 800ms",
+        "purpose": "Switch Kevin's supplied portraits once per theme change; disabled under reduced motion."
+      },
+      {
+        "name": "folder-spring",
+        "value": "spring(stiffness: 260, damping: 30)",
+        "purpose": "Shared folder surface moves between the vertical tab and open desktop panel; mobile items reflow with the same spring."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-navigation",
+        "value": "900px"
+      },
+      {
+        "name": "folder-selector",
+        "value": "700px"
+      },
+      {
+        "name": "compact-mobile-layout",
+        "value": "700px"
+      }
+    ],
+    "colorMeta": {
+      "blue": {
+        "role": "primary",
+        "displayName": "Action blue",
+        "canonical": "hsl(223 73% 45%)"
+      },
+      "dark-blue": {
+        "role": "primary",
+        "displayName": "Dark theme action blue",
+        "canonical": "hsl(220 100% 76%)"
+      },
+      "archive-dark-surface": {
+        "role": "neutral",
+        "displayName": "Archive folder surface",
+        "canonical": "#14161b"
+      },
+      "archive-dark-accent": {
+        "role": "primary",
+        "displayName": "Archive active blue",
+        "canonical": "#7aa2ff"
+      }
+    },
+    "shadows": [
+      {
+        "name": "folder-depth",
+        "value": "0 18px 48px -30px var(--archive-shadow), inset 0 1px 0 var(--archive-highlight)",
+        "purpose": "Offset folder depth and a faint top-edge highlight, requested in the archive prompt."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The leading action within a view.",
+      "html": "<a class=\"ds-primary\" href=\"#work\">Explore my work</a>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 23px;border-radius:8px;background:hsl(var(--primary,223 73% 45%));color:hsl(var(--primary-foreground,0 0% 100%));font:550 14px Inter,sans-serif;transition:transform 180ms}.ds-primary:hover{transform:translateY(-2px)}.ds-primary:focus-visible{outline:2px solid hsl(var(--primary,223 73% 45%));outline-offset:5px}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "description": "An alternate action such as downloading the CV.",
+      "html": "<a class=\"ds-secondary\" href=\"/Kevin_Mercado_CV.pdf\" download>Download CV</a>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;min-height:50px;padding:0 20px;border:1px solid hsl(var(--input,220 10% 52%));border-radius:8px;color:hsl(var(--foreground,225 16% 12%));font:500 14px Inter,sans-serif}.ds-secondary:hover{background:hsl(var(--accent,220 20% 91%))}.ds-secondary:focus-visible{outline:2px solid hsl(var(--primary,223 73% 45%));outline-offset:5px}"
+    },
+    {
+      "name": "Contact field",
+      "kind": "input",
+      "description": "A labeled field used by the retained email-draft form.",
+      "html": "<label class=\"ds-field\">Your name<input placeholder=\"Enter your name\" /></label>",
+      "css": ".ds-field{display:grid;gap:8px;font:14px Inter,sans-serif;color:hsl(var(--foreground,225 16% 12%))}.ds-field input{min-height:48px;border:1px solid hsl(var(--input,220 10% 52%));border-radius:8px;background:hsl(var(--card,0 0% 100%));color:inherit;padding:0 14px;font:inherit;caret-color:hsl(var(--primary,223 73% 45%))}.ds-field input::placeholder{color:hsl(var(--muted-foreground,220 9% 40%))}.ds-field input:focus-visible{outline:2px solid hsl(var(--primary,223 73% 45%));outline-offset:3px}"
+    },
+    {
+      "name": "Pill navigation",
+      "kind": "nav",
+      "description": "Grouped desktop routes with a contrasting active item.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Portfolio\"><a aria-current=\"page\" href=\"/\">Home</a><a href=\"/about\">About</a><a href=\"/projects\">Projects</a></nav>",
+      "css": ".ds-nav{display:inline-flex;gap:3px;padding:4px;border:1px solid hsl(var(--border,220 10% 82%));border-radius:50px;background:hsl(var(--card,0 0% 100%))}.ds-nav a{display:grid;place-items:center;min-height:38px;padding:0 19px;border-radius:30px;color:hsl(var(--muted-foreground,220 9% 40%));font:500 13px Inter,sans-serif;text-decoration:none}.ds-nav a[aria-current]{background:hsl(var(--nav-active,225 16% 12%));color:hsl(var(--nav-active-foreground,0 0% 100%))}.ds-nav a:hover{background:hsl(var(--secondary,220 14% 93%));color:hsl(var(--foreground,225 16% 12%))}.ds-nav a:focus-visible{outline:2px solid hsl(var(--primary,223 73% 45%));outline-offset:3px}"
+    },
+    {
+      "name": "Technology label",
+      "kind": "chip",
+      "description": "Subordinate project technology metadata.",
+      "html": "<span class=\"ds-technology\">Next.js</span>",
+      "css": ".ds-technology{display:inline-flex;font:12px Inter,sans-serif;color:hsl(var(--muted-foreground,220 9% 40%));padding:6px 0}"
+    },
+    {
+      "name": "Project card",
+      "kind": "card",
+      "description": "The content surface inside the three-card fan.",
+      "html": "<article class=\"ds-project\"><p>Capstone thesis project</p><h3><a href=\"https://www.herbalai.site/\">HerbalAI</a></h3><p>A Philippine medicinal-plant library with a source-grounded AI assistant.</p></article>",
+      "css": ".ds-project{padding:23px;border:1px solid hsl(var(--border,220 10% 82%));border-radius:16px;background:hsl(var(--card,0 0% 100%));color:hsl(var(--foreground,225 16% 12%));max-width:410px}.ds-project h3{font:500 25px Sora,sans-serif;margin:8px 0 10px}.ds-project h3 a{color:inherit;text-decoration:none}.ds-project h3 a:hover{color:hsl(var(--primary,223 73% 45%))}.ds-project p{font:14px/1.75 Inter,sans-serif;color:hsl(var(--muted-foreground,220 9% 40%));margin:0}.ds-project p:first-child{font-size:12px}.ds-project a:focus-visible{outline:2px solid hsl(var(--primary,223 73% 45%));outline-offset:5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Independent builder's studio",
+    "overview": "Real project interfaces carry the visual evidence, with a personal portrait giving the work a human anchor. This revision records Kevin's requested three-card fan, folder archive, and separate light/dark portraits. It remains a local preview for his manual design critique.",
+    "keyCharacteristics": [
+      "Neutral light and charcoal dark surfaces",
+      "One blue accent",
+      "Real screens and user-supplied portraits",
+      "Three homepage projects and four project folders",
+      "All original routes retained",
+      "Compact mobile identity and content-sized fanned cards",
+      "Desktop folder tabs become a mobile accordion"
+    ],
+    "rules": [],
+    "dos": [
+      "Preserve every route and its content.",
+      "Use accurate product status and attribution.",
+      "Honor reduced motion."
+    ],
+    "donts": [
+      "Do not publish without a later user request.",
+      "Do not invent product metrics or release claims."
+    ]
+  }
+}

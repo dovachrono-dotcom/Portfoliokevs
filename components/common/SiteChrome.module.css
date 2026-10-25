@@ -1,0 +1,40 @@
+.header { position: sticky; top: 0; z-index: 30; background: hsl(var(--background)); border-bottom: 1px solid hsl(var(--border) / .6); }
+.headerInner { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 14px; font-weight: 550; white-space: nowrap; }
+.brandMark { font-family: var(--font-display); font-size: 32px; font-weight: 600; color: hsl(var(--primary)); }
+.brandPeriod { color: hsl(var(--primary)); }
+.desktopNav { display: flex; align-items: center; gap: 3px; border: 1px solid hsl(var(--border)); border-radius: 50px; padding: 4px; background: hsl(var(--card)); }
+.desktopNav > a { display: grid; place-items: center; min-height: 38px; padding-inline: 19px; font-size: 13px; font-weight: 500; color: hsl(var(--muted-foreground)); border-radius: 30px; transition: background 160ms, color 160ms; }
+.desktopNav > a:hover { background: hsl(var(--secondary)); color: hsl(var(--foreground)); }
+.desktopNav > a[aria-current] { background: hsl(var(--nav-active)); color: hsl(var(--nav-active-foreground)); }
+.headerRight { display: flex; align-items: center; gap: 8px; }
+.menuToggle:hover, .closeButton:hover { background: hsl(var(--accent)); }
+.menuToggle, .closeButton { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; }
+.menuToggle { display: none; border: 1px solid hsl(var(--border)); }
+.mobileOverlay { position: fixed; inset: 0; background: hsl(var(--overlay) / .6); z-index: 40; }
+.mobilePanel { position: fixed; top: 12px; left: 12px; right: 12px; max-height: calc(100dvh - 24px); overflow-y: auto; z-index: 50; background: hsl(var(--card)); color: hsl(var(--foreground)); padding: 20px 20px max(24px, env(safe-area-inset-bottom)); border-radius: 14px; }
+.mobilePanelTop { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-display); font-size: 24px; }
+.mobileDescription { margin: 4px 0 22px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.mobileNav { display: flex; flex-direction: column; }
+.mobileNav > a { display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 12px; border-top: 1px solid hsl(var(--border)); font-size: 20px; }
+.mobileNav > a[aria-current] { color: hsl(var(--primary)); }
+.mobileNav > a:hover { background: hsl(var(--secondary)); }
+@media (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="reduced"])) .mobilePanel[data-state="open"] { animation: panelIn 200ms var(--ease-studio); }
+  :global(html:not([data-motion="reduced"])) .mobilePanel[data-state="closed"] { animation: panelIn 160ms ease-in reverse; }
+  :global(html:not([data-motion="reduced"])) .mobileOverlay[data-state="open"] { animation: fadeIn 180ms ease-out; }
+  :global(html:not([data-motion="reduced"])) .mobileOverlay[data-state="closed"] { animation: fadeIn 160ms ease-in reverse; }
+}
+:global(html[data-motion="full"]) .mobilePanel[data-state="open"] { animation: panelIn 200ms var(--ease-studio); }
+:global(html[data-motion="full"]) .mobilePanel[data-state="closed"] { animation: panelIn 160ms ease-in reverse; }
+:global(html[data-motion="full"]) .mobileOverlay[data-state="open"] { animation: fadeIn 180ms ease-out; }
+:global(html[data-motion="full"]) .mobileOverlay[data-state="closed"] { animation: fadeIn 160ms ease-in reverse; }
+@keyframes panelIn { from { opacity: 0; transform: translateY(-12px); } }
+@keyframes fadeIn { from { opacity: 0; } }
+@media (max-width: 1050px) { .desktopNav > a { padding-inline: 14px; } .headerInner { gap: 16px; } }
+@media (max-width: 900px) { .desktopNav { display: none; } .menuToggle { display: grid; } }
+@media (max-width: 600px) {
+  .headerInner { min-height: 68px; gap: 12px; }
+  .brand { font-size: 13px; gap: 9px; }
+  .brandMark { font-size: 28px; }
+}

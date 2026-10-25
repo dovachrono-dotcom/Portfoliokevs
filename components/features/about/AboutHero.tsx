@@ -1,63 +1,27 @@
-"use client";
 import { RESUME_DATA } from "@/lib/data";
-import { User, Download } from "lucide-react";
+import { PORTFOLIO } from "@/lib/portfolio";
+import { Download } from "lucide-react";
+import { ThemePortrait } from "@/components/common/ThemePortrait";
+import { ScrollText } from "@/components/common/ScrollText";
+import styles from "./About.module.css";
 
 export function AboutHero() {
   return (
-    <section className="space-y-2">
-      {/* Container for Name + Picture */}
-      <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-5">
-
-        {/* Left Side: Name and Role */}
-        <div className="space-y-2">
-          <div className="space-y-2">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter">
-              Kevin C. Mercado
-            </h1>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-emerald-500"></span>
-              <h2 className="text-xl md:text-2xl font-medium text-emerald-500">
-                FrontEnd Developer
-              </h2>
-            </div>
-          </div>
-
-          {/* Download CV Button Added Here */}
-          <div className="pt-4">
-            <a
-              href="/Kevin_Mercado_CV.pdf"
-              download
-              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
-            >
-              <Download className="w-4 h-4" />
-              Download CV
-            </a>
-          </div>
-        </div>
-
-        {/* Right Side: Your Picture */}
-        <div className="relative group">
-          <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-emerald-500/20 shadow-2xl shadow-emerald-500/10 transition-transform duration-500 group-hover:scale-105">
-            <img
-              src={RESUME_DATA.profile.avatar}
-              alt={RESUME_DATA.profile.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          {/* Decorative glow behind photo */}
-          <div className="absolute -z-10 inset-0 bg-emerald-500/20 blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity"></div>
-        </div>
+    <section aria-labelledby="about-name" className={styles.hero}>
+      <header className={styles.identity}>
+        <ScrollText as="h1" id="about-name">{RESUME_DATA.profile.name}</ScrollText>
+        <p className={styles.role}>{RESUME_DATA.profile.role}</p>
+        <a href={PORTFOLIO.cv} download data-glow="button" className={styles.cvButton}>
+          <Download size={17} aria-hidden="true" /> Download CV
+        </a>
+      </header>
+      <div className={styles.portrait}>
+        <ThemePortrait priority sizes="(min-width: 800px) 240px, (min-width: 600px) 176px, 112px" />
       </div>
-
-      {/* About Me Section Below */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold flex items-center gap-2">
-          <User className="w-5 h-5 text-emerald-500" />
-          About Me
-        </h2>
-        <div className="bg-card text-card-foreground rounded-2xl p-8 leading-relaxed border shadow-sm">
-          {RESUME_DATA.profile.about}
-        </div>
+      <div className={styles.bio}>
+        <ScrollText>{RESUME_DATA.profile.about}</ScrollText>
+        <ScrollText>{RESUME_DATA.profile.approach}</ScrollText>
+        <ScrollText className={styles.personalNote}>{RESUME_DATA.profile.interests}</ScrollText>
       </div>
     </section>
   );

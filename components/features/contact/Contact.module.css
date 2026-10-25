@@ -1,0 +1,121 @@
+.page { --contact-error: 0 70% 40%; --contact-button: 220 100% 76%; --contact-button-text: 225 30% 11%; --contact-foot-shadow: rgba(0, 0, 0, .15); --contact-gutter: 64px; --contact-card-gap: 24px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--contact-gutter); align-items: stretch; }
+:global(.dark) .page { --contact-error: 0 85% 73%; --contact-foot-shadow: rgba(0, 0, 0, .5); }
+.leftColumn { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); grid-template-rows: max-content max-content max-content minmax(0, 1fr); column-gap: 24px; min-width: 0; }
+.page .introBlock { display: contents; }
+.introBlock > .heading { grid-column: 1; grid-row: 1; }
+.introBlock > .intro { grid-column: 1; grid-row: 2; }
+.page .heading { font-family: var(--font-display); font-size: clamp(2.75rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -.02em; margin: 0; }
+.page .intro { max-width: 46ch; font-size: 16px; line-height: 1.6; color: hsl(var(--muted-foreground)); margin: 24px 0 0; }
+.cardsBlock { position: relative; grid-column: 1; grid-row: 3; display: grid; gap: 16px; width: 100%; margin-top: var(--contact-card-gap); }
+.contactCard { display: grid; grid-template-columns: 48px minmax(0, 1fr) 44px; align-items: center; gap: 16px; padding: 16px; border: 1px solid hsl(var(--border)); border-radius: 16px; background: hsl(var(--secondary) / .45); transition: border-color 150ms, background-color 150ms; }
+.contactCard:hover { border-color: hsl(var(--input)); }
+.iconTile { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: hsl(var(--primary) / .08); color: hsl(var(--primary)); transition: background-color 150ms; }
+.contactCard:hover .iconTile { background: hsl(var(--primary) / .16); }
+.contactText { min-width: 0; }
+.page .contactText > p { margin: 0 0 4px; color: hsl(var(--muted-foreground)); font-size: 13px; line-height: 1.6; }
+.page .contactValue { font-size: 16px; font-weight: 500; line-height: 1.6; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: hsl(var(--input)); overflow-wrap: anywhere; }
+.copyButton { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; color: hsl(var(--muted-foreground)); transition: background-color 150ms, border-color 150ms; }
+.copyButton:hover { background: hsl(var(--primary) / .1); color: hsl(var(--primary)); }
+.page .copyFeedback { position: absolute; top: 100%; left: 0; width: 100%; margin: 8px 0 0; font-size: 12px; line-height: 1.5; color: hsl(var(--muted-foreground)); pointer-events: none; }
+.socials { grid-column: 1; grid-row: 4; margin-top: 40px; }
+.mobileSocials { display: none; }
+.page .socials > p { font-size: 14px; font-weight: 500; line-height: 1.6; color: hsl(var(--muted-foreground)); margin: 0 0 16px; }
+.socials > div { display: flex; gap: 16px; }
+.socialLink { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid hsl(var(--border)); border-radius: 12px; transition: border-color 150ms, background-color 150ms; }
+.socialLink:hover { border-color: hsl(var(--input)); background: hsl(var(--primary) / .1); color: hsl(var(--primary)); }
+.formCard { min-width: 0; padding: 32px; border: 1px solid hsl(var(--border)); border-radius: 16px; background: hsl(var(--card)); }
+.form { display: grid; gap: 24px; }
+.nameFields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.field { min-width: 0; }
+.field > label { display: block; font-size: 14px; font-weight: 500; line-height: 1.5; margin-bottom: 6px; }
+.page .form input, .page .form textarea { display: block; width: 100%; height: 48px; border: 1px solid hsl(var(--input)); border-radius: 12px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; font-size: 16px; line-height: 1.5; padding: 11px 12px; caret-color: hsl(var(--primary)); transition: border-color 150ms, background-color 150ms; }
+.page .form textarea { min-height: 160px; height: 160px; resize: vertical; padding-bottom: 32px; }
+.page .form input::placeholder, .page .form textarea::placeholder { color: hsl(var(--muted-foreground)); opacity: 1; }
+.page .form input:hover:not(:disabled), .page .form textarea:hover:not(:disabled) { border-color: hsl(var(--primary) / .7); }
+.page :is(a, button):focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 2px; }
+.page .form input:focus, .page .form textarea:focus { outline: none; border-color: hsl(var(--primary)); box-shadow: 0 0 0 2px hsl(var(--card)), 0 0 0 4px hsl(var(--primary)); }
+.page .form input[aria-invalid="true"], .page .form textarea[aria-invalid="true"] { border-color: hsl(var(--contact-error)); }
+.page .form input:disabled, .page .form textarea:disabled { opacity: .55; background: hsl(var(--muted)); cursor: not-allowed; }
+.page .fieldError { margin: 6px 0 0; color: hsl(var(--contact-error)); font-size: 13px; line-height: 1.6; }
+.messageWrap { position: relative; }
+.characterCount { position: absolute; bottom: 12px; right: 12px; color: hsl(var(--muted-foreground)); background: hsl(var(--background)); font-size: 11px; line-height: 1.4; pointer-events: none; }
+.formActions { min-width: 0; }
+.submit { display: flex; align-items: center; justify-content: center; width: 100%; height: 52px; gap: 12px; border-radius: 12px; background: hsl(var(--contact-button)); color: hsl(var(--contact-button-text)); font-size: 15px; font-weight: 550; transition: transform 150ms, background-color 150ms, box-shadow 150ms; }
+.submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 16px -8px hsl(var(--shadow) / .35); }
+.submit:active:not(:disabled) { transform: translateY(0); background: hsl(220 100% 72%); }
+.submit svg { transition: transform 150ms; }
+.submit:hover:not(:disabled) svg { transform: translateX(2px); }
+.submit:disabled { opacity: .5; cursor: not-allowed; }
+.page .deliveryNote { margin: 16px 0 0; font-size: 12px; line-height: 1.7; color: hsl(var(--muted-foreground)); }
+.fallbackLink { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-size: 12px; color: hsl(var(--foreground)); text-underline-offset: 5px; text-decoration: underline; text-decoration-color: hsl(var(--input)); }
+.figureTrack { display: grid; grid-template-rows: subgrid; grid-column: 2; grid-row: 2 / -1; min-width: 0; min-height: 0; align-self: stretch; }
+.figureArea { container: pointer-track / size; display: grid; grid-row: 2 / -1; min-width: 0; min-height: 0; margin-top: 24px; }
+/* Normal desktop sizes stay above 300px. Width caps the figure at narrow desktop widths, as requested. */
+.figure { --pointer-light: url('/contact/pointer-light.webp'); --pointer-dark: url('/contact/pointer-dark.webp'); --figure-height: min(440px, 100cqh, calc((100cqw + var(--contact-gutter) - 20px) * 796 / 414)); display: block; position: relative; align-self: end; justify-self: end; height: var(--figure-height); width: calc(var(--figure-height) * 414 / 796); margin-right: calc(20px - var(--contact-gutter)); aspect-ratio: 414 / 796; overflow: clip; pointer-events: none; user-select: none; }
+/* Keep the original image canvas for the swap, trimming only its transparent margins in layout. */
+.figureFacing { position: absolute; top: calc(-100% * 64 / 796); left: calc(-100% * 114 / 414); width: calc(100% * 600 / 414); height: calc(100% * 900 / 796); overflow: hidden; transform: scaleX(-1); }
+.figureLayer { position: absolute; inset: 0; z-index: 1; opacity: 0; }
+.figureImage { object-fit: contain; }
+.figure[data-visible-theme="auto"] [data-figure-layer="light"], .figure[data-visible-theme="light"] [data-figure-layer="light"], .figure[data-visible-theme="dark"] [data-figure-layer="dark"] { opacity: 1; }
+:global(.dark) .figure[data-visible-theme="auto"] [data-figure-layer="light"] { opacity: 0; }
+:global(.dark) .figure[data-visible-theme="auto"] [data-figure-layer="dark"] { opacity: 1; }
+.figure[data-target-theme="light"] [data-figure-layer="light"], .figure[data-target-theme="dark"] [data-figure-layer="dark"] { z-index: 2; }
+.footShadow { position: absolute; width: 60%; height: 10px; left: -4%; bottom: 0; background: var(--contact-foot-shadow); border-radius: 50%; filter: blur(8px); }
+.figureStreak { position: absolute; inset: 0; z-index: 3; opacity: 0; pointer-events: none; mix-blend-mode: screen; mask-size: contain; mask-position: center; mask-repeat: no-repeat; -webkit-mask-size: contain; -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; }
+.figure[data-target-theme="light"] .figureStreak { mask-image: var(--pointer-light); -webkit-mask-image: var(--pointer-light); }
+.figure[data-target-theme="dark"] .figureStreak { mask-image: var(--pointer-dark); -webkit-mask-image: var(--pointer-dark); }
+.streakTravel { position: absolute; inset: 0; }
+.streakTravel > span { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: linear-gradient(180deg, transparent, rgb(255 255 255 / .95), transparent); filter: blur(1.2px); }
+@media (min-width: 900px) {
+  .page .heading { font-size: clamp(2.75rem, 4vw, 3.5rem); }
+  .page .intro { margin-top: 16px; }
+  .socials { margin-top: 32px; }
+  .page .socials > p { margin-bottom: 12px; }
+}
+@media (min-width: 1100px) {
+  .page .contactValue { display: inline-block; white-space: nowrap; overflow-wrap: normal; }
+}
+@media (min-width: 900px) and (max-height: 760px) {
+  .page { --contact-card-gap: 16px; }
+  .page .heading { font-size: clamp(2.5rem, 3.8vw, 3rem); }
+  .contactCard { grid-template-columns: 40px minmax(0, 1fr) 44px; gap: 12px; padding: 12px; }
+  .iconTile { width: 40px; height: 40px; }
+  .cardsBlock { gap: 12px; }
+  .socials { margin-top: 24px; }
+  .page .socials > p { margin-bottom: 8px; }
+  .formCard { padding: 24px; }
+  .form { gap: 16px; }
+  .page .form textarea { min-height: 128px; height: 128px; }
+  .page .deliveryNote { margin-top: 12px; }
+}
+@media (max-width: 1199px) { .page { --contact-gutter: 40px; } }
+@media (max-width: 1099px) {
+  .page { --contact-card-gap: 32px; }
+  .leftColumn, .page .introBlock { display: block; }
+  .figureTrack { display: none; }
+}
+@media (max-width: 899px) {
+  .page { display: flex; flex-direction: column; align-items: stretch; }
+  .leftColumn { display: contents; }
+  .introBlock { order: 1; }
+  .cardsBlock { order: 2; }
+  .formCard { order: 3; width: 100%; margin-top: 32px; padding: 20px; }
+  .socials { order: 4; margin-top: 40px; }
+  .desktopSocials { display: none; }
+  .mobileSocials { display: block; }
+}
+@media (max-width: 479px) {
+  .nameFields { grid-template-columns: minmax(0, 1fr); }
+  .contactCard { grid-template-columns: 40px minmax(0, 1fr) 44px; gap: 12px; }
+  .iconTile { width: 40px; height: 40px; }
+  .page .contactValue { font-size: 14px; }
+  .page .contactText > p { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-motion="full"])) .page .submit, :global(html:not([data-motion="full"])) .page .submit:hover, :global(html:not([data-motion="full"])) .page .submit:active { transform: none; transition-property: background-color, box-shadow; transition-duration: 150ms !important; }
+  :global(html:not([data-motion="full"])) .page .submit svg { transform: none !important; transition: none !important; }
+  :global(html:not([data-motion="full"])) .page :is(.contactCard, .iconTile, .copyButton, .socialLink), :global(html:not([data-motion="full"])) .page .form input, :global(html:not([data-motion="full"])) .page .form textarea { transition-duration: 150ms !important; }
+}
+  :global(html[data-motion="reduced"]) .page .submit, :global(html[data-motion="reduced"]) .page .submit:hover, :global(html[data-motion="reduced"]) .page .submit:active { transform: none; transition-property: background-color, box-shadow; transition-duration: 150ms !important; }
+  :global(html[data-motion="reduced"]) .page .submit svg { transform: none !important; transition: none !important; }
+  :global(html[data-motion="reduced"]) .page :is(.contactCard, .iconTile, .copyButton, .socialLink), :global(html[data-motion="reduced"]) .page .form input, :global(html[data-motion="reduced"]) .page .form textarea { transition-duration: 150ms !important; }

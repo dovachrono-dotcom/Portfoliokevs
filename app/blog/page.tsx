@@ -1,10 +1,12 @@
-import { BlogList } from "@/components/features/blog/BlogList";
+import type { Metadata } from "next";
+import { BlogArchive } from "@/components/features/blog/BlogArchive";
+import { BLOG_POSTS } from "@/lib/blog";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Kevin's stories about building HerbalAI, getting through capstone problems, and life as a working student.",
+};
 
 export default function BlogPage() {
-  return (
-    <div className="container mx-auto max-w-4xl px-6 py-20">
-      <h1 className="text-5xl font-bold tracking-tighter mb-10">My Blog</h1>
-      <BlogList />
-    </div>
-  );
+  return <BlogArchive title="Blog" description="Notes on building things, getting stuck, and balancing school with work." posts={BLOG_POSTS} />;
 }

@@ -1,0 +1,14 @@
+.entrance { display: contents; }
+:global(html.js) .entrance[data-entry-pending] { display: block; position: relative; height: 100%; opacity: 0; }
+:global(html.js) .entrance[data-entry-pending][data-entry-side="left"] { transform: translate3d(-34vw,0,0) rotate(-14deg); }
+:global(html.js) .entrance[data-entry-pending][data-entry-side="right"] { transform: translate3d(34vw,0,0) rotate(14deg); }
+:global(html.js) .entrance[data-entry-pending][data-entry-side="center"] { transform: translate3d(0,90px,0); }
+@media (max-width: 899px) {
+  :global(html.js) .entrance[data-entry-pending][data-entry-side="left"] { transform: translate3d(-20vw,0,0) rotate(-14deg); }
+  :global(html.js) .entrance[data-entry-pending][data-entry-side="right"] { transform: translate3d(20vw,0,0) rotate(14deg); }
+  :global(html.js) .entrance[data-entry-pending][data-entry-side="center"] { transform: translate3d(0,24px,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-motion="full"]).js) .entrance[data-entry-pending] { transform: none; opacity: 1; }
+}
+  :global(html[data-motion="reduced"].js) .entrance[data-entry-pending] { transform: none; opacity: 1; }

@@ -1,22 +1,20 @@
 import { ProjectsList } from "@/components/features/projects/ProjectsList";
+import { ScrollText } from "@/components/common/ScrollText";
+import styles from "@/components/features/projects/Projects.module.css";
+import { MotionProvider } from "@/components/provider/MotionProvider";
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-background pb-24">
-      {}
-      <div className="bg-muted/30 border-b mb-12">
-        <div className="container mx-auto max-w-6xl px-6 py-10">
-          <h1 className="text-5xl font-bold tracking-tighter  mb-4">My Projects</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            A collection of web applications and tools I've built, focusing on React, Next.js, and API integrations.
-          </p>
-        </div>
-      </div>
-
-      {}
-      <div className="container mx-auto max-w-6xl px-6">
+    <MotionProvider>
+    <div className={styles.page}>
+      <header>
+          <ScrollText as="h1" className={styles.heading}>My Projects</ScrollText>
+          <ScrollText className={`${styles.intro} text-muted-foreground`}>
+            Web and mobile applications I’ve built, from side projects to my school and capstone thesis work.
+          </ScrollText>
+      </header>
         <ProjectsList />
-      </div>
     </div>
+    </MotionProvider>
   );
 }

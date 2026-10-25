@@ -1,0 +1,19 @@
+{
+  "explorer.sortOrder": "default",
+  "explorer.compactFolders": false,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/*.tsbuildinfo": true,
+    ".impeccable": true,
+    "review": true,
+    "output": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    ".impeccable/**": true,
+    "review/**": true,
+    "output/**": true
+  }
+}

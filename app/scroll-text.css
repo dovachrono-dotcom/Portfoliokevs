@@ -1,0 +1,17 @@
+[data-scroll-text] [data-scroll-word] {
+  display: inline-block;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion="full"]) [data-scroll-pending] [data-scroll-word] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+  html[data-motion="reduced"] [data-scroll-pending] [data-scroll-word] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }

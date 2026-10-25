@@ -1,0 +1,67 @@
+{
+  "name": "Kevin C. Mercado",
+  "role": "Web & mobile developer",
+  "email": "kevinmercado987@gmail.com",
+  "phone": {
+    "display": "+63 981 251 3789",
+    "href": "tel:+639812513789"
+  },
+  "location": "Cordova, Cebu, Philippines",
+  "summary": "Fourth-year BSIT student at Cordova Public College who builds web and mobile applications. My projects include an educational medicinal-plant platform, a browser-based ID photo editor, and a camera app. I am interested in AI-assisted development and practical tools for everyday use.",
+  "about": "I’m Kevin, a fourth-year Bachelor of Science in Information Technology student at Cordova Public College in Cordova, Cebu. I started college in 2023 and enjoy learning through practical web and mobile projects.",
+  "approach": "I’m interested in AI and technology trends, including AI-assisted coding. My projects give me a way to explore those interests while building tools people can use, from preparing ID photos to learning about Philippine medicinal plants.",
+  "interests": "Outside development, I enjoy rock music, reading books, playing games, and outdoor activities. My other skills include bartending and multitasking.",
+  "leadership": {
+    "role": "Class councilor",
+    "organization": "BSIT 4B, Cordova Public College",
+    "description": "I also serve as a class councilor in BSIT 4B at Cordova Public College."
+  },
+  "education": [
+    {
+      "school": "Cordova Public College",
+      "qualification": "Bachelor of Science in Information Technology",
+      "period": "2023 - present",
+      "detail": "Fourth-year student"
+    },
+    {
+      "school": "Cordova National High School",
+      "qualification": "High school",
+      "period": "Graduated 2020-2021",
+      "detail": ""
+    },
+    {
+      "school": "Cordova Central School",
+      "qualification": "Elementary education",
+      "period": "Graduated 2016-2017",
+      "detail": ""
+    }
+  ],
+  "skillGroups": [
+    {
+      "title": "Frontend",
+      "description": "The interface for HerbalAI’s plant library, assistant, and community pages.",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+    },
+    {
+      "title": "Backend & data",
+      "description": "The API and database behind accounts, plant records, and community content.",
+      "technologies": ["Node.js", "Express", "PostgreSQL", "Prisma"]
+    },
+    {
+      "title": "AI, search & live features",
+      "description": "Source-grounded answers with retrieval-augmented generation (RAG), vector search, live events, and image storage.",
+      "technologies": ["Gemini API", "RAG", "pgvector", "Socket.IO", "Cloudinary"]
+    }
+  ],
+  "otherSkills": ["Flutter", "Kotlin", "CameraX", "PWA"],
+  "experience": {
+    "role": "Head Waiter",
+    "company": "Virtucio Caterers",
+    "period": "2023 - present",
+    "description": "Lead the service team in communicating with clients and providing attentive service."
+  },
+  "certifications": [
+    { "title": "Creative Web Design", "issuer": "TESDA", "date": "June 2024" },
+    { "title": "Cookery NC II", "issuer": "TESDA", "date": "March 2024" }
+  ]
+}

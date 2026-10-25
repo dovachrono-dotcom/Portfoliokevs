@@ -1,21 +1,23 @@
-import React from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { BlogDetails } from "@/components/features/blog/BlogDetails";
+import { BLOG_POSTS, getBlogPost } from "@/lib/blog";
 
-// 1. Single dynamic segment: /blog/my-first-post
-export default async function BlogPostPage(props: { params: Promise<{ slug: string }> }) {
-  // We wait for the params to load first
-  const params = await props.params;
-  const slug = params.slug;
-  
-  return (
-    <div className="container md:mx-auto p-10 mt-10 border rounded shadow-sm bg-card">
-      <h1 className="text-3xl font-bold mb-4">Blog Post Title</h1>
-      <p className="text-lg">
-        You are currently reading the blog post with the slug: <b>{slug}</b>
-      </p>
-      <br />
-      <p className="text-muted-foreground">
-        (This is a simple example of a single dynamic route for beginners.)
-      </p>
-    </div>
-  );
+type PageProps = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  return { title: post?.title ?? "Story not found", description: post?.excerpt };
+}
+
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) notFound();
+  return <BlogDetails post={post} />;
 }

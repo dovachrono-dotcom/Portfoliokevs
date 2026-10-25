@@ -1,46 +1,50 @@
 "use client";
 
-import { X } from "lucide-react";
-import { useEffect } from "react";
+import Image from "next/image";
+import { X, ExternalLink } from "lucide-react";
+import { Dialog } from "radix-ui";
+import { useState, type ReactElement } from "react";
+import styles from "./ZoomModal.module.css";
 
 interface ZoomModalProps {
   imageUrl: string;
-  onClose: () => void;
+  title: string;
+  description: string;
+  children: ReactElement;
 }
 
-export function ZoomModal({ imageUrl, onClose }: ZoomModalProps) {
-  // Prevent scrolling when modal is open
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
-
-  if (!imageUrl) return null;
+export function ZoomModal({ imageUrl, title, description, children }: ZoomModalProps) {
+  const [imageState, setImageState] = useState<"loading" | "ready" | "error">("loading");
 
   return (
-    <div 
-      className="fixed inset-0 z-100 flex items-center justify-center p-4 backdrop-blur-md bg-background/90 animate-in fade-in duration-300"
-      onClick={onClose}
-    >
-      <div 
-        className="relative w-full max-w-5xl max-h-[95vh] overflow-hidden rounded-xl shadow-2xl"
-        onClick={(e) => e.stopPropagation()} 
-      >
-        <img 
-          src={imageUrl} 
-          alt="Zoomed Content" 
-          className="w-full h-full object-contain"
-        />
-        <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 p-3 rounded-full transition-colors z-10 bg-black/50 text-white hover:bg-black/80"
-          title="Close"
-        >
-          <X className="w-6 h-6" />
-        </button>
-      </div>
-    </div>
+    <Dialog.Root onOpenChange={(open) => { if (open) setImageState("loading"); }}>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.overlay} />
+        <Dialog.Content className={styles.content}>
+          <div className={styles.header}>
+            <div>
+              <Dialog.Title className={styles.title}>{title}</Dialog.Title>
+              <Dialog.Description className={styles.description}>{description}</Dialog.Description>
+            </div>
+            <Dialog.Close className={styles.close} aria-label="Close certificate preview">
+              <X size={21} aria-hidden="true" />
+            </Dialog.Close>
+          </div>
+          <div className={styles.imageFrame}>
+            {imageState === "loading" && <p role="status" className={styles.imageStatus}>Loading certificate…</p>}
+            {imageState === "error" ? (
+              <p role="status" className={styles.imageStatus}>The preview couldn’t load. Use “Open original” below to view the certificate.</p>
+            ) : (
+              <Image src={imageUrl} alt={`${title} certificate`} fill sizes="(max-width: 1100px) 95vw, 1060px" className={styles.image} onLoad={() => setImageState("ready")} onError={() => setImageState("error")} />
+            )}
+          </div>
+          <div className={styles.footer}>
+            <span>Press Escape to close</span>
+            <a href={imageUrl} target="_blank" rel="noopener noreferrer">Open original <span className="sr-only">(opens in a new tab)</span><ExternalLink size={16} aria-hidden="true" /></a>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

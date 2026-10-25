@@ -1,0 +1,71 @@
+@property --bg-base { syntax: "<color>"; inherits: true; initial-value: #f7f8f9; }
+@property --bg-glow-1 { syntax: "<color>"; inherits: true; initial-value: rgba(255,190,140,.38); }
+@property --bg-glow-2 { syntax: "<color>"; inherits: true; initial-value: rgba(255,190,140,.15); }
+@property --bg-grid-line { syntax: "<color>"; inherits: true; initial-value: rgba(20,25,40,.06); }
+@property --bg-pixel { syntax: "<color>"; inherits: true; initial-value: rgba(59,91,219,.16); }
+@property --bg-grain-opacity { syntax: "<number>"; inherits: true; initial-value: .05; }
+@property --bg-pixel-fill { syntax: "<color>"; inherits: true; initial-value: #1a1c23; }
+
+.root {
+  --bg-base: hsl(var(--background));
+  --bg-glow-1: rgba(255,190,140,.38);
+  --bg-glow-2: rgba(255,190,140,.15);
+  --bg-grid-line: rgba(26,28,35,.06);
+  --bg-pixel: rgba(26,28,35,.09);
+  --bg-pixel-fill: hsl(var(--foreground));
+  --bg-runner-glow: rgba(26,28,35,.18);
+  --bg-grain-opacity: .05;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: clip;
+  background: var(--bg-base);
+  animation: background-in 1200ms ease both;
+  transition: --bg-base 400ms ease, --bg-glow-1 400ms ease, --bg-glow-2 400ms ease, --bg-grid-line 400ms ease, --bg-pixel 400ms ease, --bg-grain-opacity 400ms ease, --bg-pixel-fill 400ms ease;
+}
+:global(.dark) .root { --bg-glow-1: rgba(122,162,255,.17); --bg-glow-2: rgba(122,162,255,.07); --bg-grid-line: rgba(255,255,255,.045); --bg-pixel: rgba(122,162,255,.2); --bg-pixel-fill: hsl(var(--primary)); --bg-runner-glow: hsl(var(--primary) / .5); --bg-grain-opacity: .035; }
+.glow, .grid, .pixels, .cursorPixels, .staticPixels, .grain, .contrastGuard { position: absolute; inset: 0; pointer-events: none; }
+.pixels, .staticPixels { opacity: .24; }
+:global(.dark) :is(.pixels,.staticPixels) { opacity: .48; }
+.cursorPixels { opacity: .14; }
+:global(.dark) .cursorPixels { opacity: .28; }
+.cursorPixels .pixel { width: 27px; height: 27px; margin: 1px 0 0 1px; }
+.orb { position: absolute; border-radius: 50%; will-change: transform; animation-play-state: paused; }
+.orbOne { width: 68vw; height: 60vw; left: calc(72% - 34vw); top: calc(48% - 30vw); background: radial-gradient(closest-side,var(--bg-glow-1),transparent),radial-gradient(closest-side,var(--bg-glow-1),transparent); animation: drift-one 11s ease-in-out infinite alternate paused; }
+.orbTwo { width: 48vw; height: 40vw; left: calc(14% - 24vw); top: calc(28% - 20vw); background: radial-gradient(closest-side,var(--bg-glow-2),transparent),radial-gradient(closest-side,var(--bg-glow-2),transparent),radial-gradient(closest-side,var(--bg-glow-2),transparent); animation: drift-two 14s ease-in-out infinite alternate paused; }
+.grid { background-image: linear-gradient(var(--bg-grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--bg-grid-line) 1px,transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at 50% 45%,#000 0%,rgba(0,0,0,.65) 60%,transparent 100%); }
+.sweep { position: absolute; top: -10%; bottom: -10%; left: 0; width: 26vw; background: linear-gradient(100deg,transparent,var(--bg-pixel) 50%,transparent),linear-gradient(100deg,transparent,var(--bg-pixel) 50%,transparent); transform: translateX(-40vw) skewX(-12deg); animation: sweep 7s ease-in-out infinite paused; }
+.pixel { position: absolute; left: 0; top: 0; width: 28px; height: 28px; background: var(--bg-pixel-fill); opacity: 0; pointer-events: none; transition: background-color 400ms ease; }
+.runner { box-shadow: 0 0 18px 3px var(--bg-runner-glow); transition: transform 220ms cubic-bezier(.3,1.5,.5,1),background-color 400ms ease,box-shadow 400ms ease; }
+.staticPixels .pixel { opacity: .4; }
+.root[data-motion="full"] .staticPixels { display: none; }
+.spot { position: absolute; left: 0; top: 0; width: 680px; height: 680px; margin: -340px 0 0 -340px; border-radius: 50%; background: radial-gradient(closest-side,var(--bg-pixel),transparent),radial-gradient(closest-side,var(--bg-pixel),transparent); opacity: 0; transition: opacity 500ms ease; will-change: transform; }
+.root[data-pointer-active="true"] .spot { opacity: .18; }
+.grain { opacity: var(--bg-grain-opacity); mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.contrastGuard { background: color-mix(in srgb,var(--bg-base) 94%,transparent); }
+:global(.dark) .contrastGuard { background: color-mix(in srgb,var(--bg-base) 91%,transparent); }
+.root[data-running="true"] :is(.orb,.sweep) { animation-play-state: running; }
+.root:not([data-running="true"]) .spot { opacity: 0; }
+.root[data-motion="reduced"] :is(.orb,.sweep) { animation: none; }
+.root[data-motion="reduced"] :is(.spot,.sweep) { display: none; }
+
+@keyframes background-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes drift-one { to { transform: translate3d(-18vw,12vw,0) scale(1.3); } }
+@keyframes drift-two { to { transform: translate3d(22vw,-8vw,0) scale(1.35); } }
+@keyframes sweep { 0% { transform: translateX(-40vw) skewX(-12deg); } 65%,100% { transform: translateX(130vw) skewX(-12deg); } }
+@media (max-width: 767px) {
+  .orbOne { left: calc(50% - 34vw); top: 6%; }
+  .orbTwo, .spot { display: none; }
+  .grid { opacity: .7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html:not([data-motion="full"])) .root { animation: none; opacity: 1; }
+  :global(html:not([data-motion="full"])) .root .orb { animation: none; transform: none; }
+  :global(html:not([data-motion="full"])) .spot, :global(html:not([data-motion="full"])) .sweep, :global(html:not([data-motion="full"])) .pixels, :global(html:not([data-motion="full"])) .cursorPixels { display: none; }
+  :global(html:not([data-motion="full"])) .root .staticPixels { display: block; }
+}
+  :global(html[data-motion="reduced"]) .root { animation: none; opacity: 1; }
+  :global(html[data-motion="reduced"]) .root .orb { animation: none; transform: none; }
+  :global(html[data-motion="reduced"]) .spot, :global(html[data-motion="reduced"]) .sweep, :global(html[data-motion="reduced"]) .pixels, :global(html[data-motion="reduced"]) .cursorPixels { display: none; }
+  :global(html[data-motion="reduced"]) .root .staticPixels { display: block; }

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local review evidence and preview logs
+/review/
+
+# generated CV exports (the website copy lives in public/)
+/output/
