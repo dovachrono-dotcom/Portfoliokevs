@@ -23,7 +23,7 @@ export function ThemeToggle() {
     timer.current = window.setTimeout(() => {
       delete document.documentElement.dataset.themeChanging;
       timer.current = undefined;
-    }, 1100);
+    }, 450);
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
 

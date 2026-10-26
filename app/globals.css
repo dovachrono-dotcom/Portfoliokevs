@@ -124,8 +124,15 @@ button { cursor: pointer; }
 .text-link:hover { color: hsl(var(--primary)); text-decoration-color: currentColor; }
 .action-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; padding: 0 20px; border: 1px solid hsl(var(--input)); border-radius: 8px; font-size: 14px; font-weight: 500; transition: background 180ms; }
 .action-secondary:hover { background: hsl(var(--accent)); }
-  html[data-theme-changing] :where(body, div, header, main, section, article, footer, nav, a, button, p, span, h1, h2, h3, li, ul, dl, dt, dd, label, input, textarea, figcaption):not([data-theme-motion]) {
-    transition-property: background-color, color, border-color;
+  /* Animate explicit surfaces, not inherited colors on every descendant.
+     Otherwise each text wrapper keeps restarting its parent's color fade. */
+  html[data-theme-changing] :where(body, [data-site-shell]) {
+    transition-property: background-color, color;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  }
+  html[data-theme-changing] :where(header, nav, article, input, textarea, [data-theme-surface]) {
+    transition-property: background-color, border-color;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   }
@@ -135,8 +142,8 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   html:not([data-motion="full"]) { scroll-behavior: auto; }
   html:not([data-motion="full"]) *, html:not([data-motion="full"]) *::before, html:not([data-motion="full"]) *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-  html:not([data-motion="full"])[data-theme-changing] :where(body, div, header, main, section, article, footer, nav, a, button, p, span, h1, h2, h3, li, ul, dl, dt, dd, label, input, textarea, figcaption):not([data-theme-motion]) { transition-duration: 300ms !important; }
+  html:not([data-motion="full"])[data-theme-changing] :where(body, [data-site-shell], header, nav, article, input, textarea, [data-theme-surface]) { transition-duration: 300ms !important; }
 }
   html[data-motion="reduced"] { scroll-behavior: auto; }
   html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-  html[data-motion="reduced"][data-theme-changing] :where(body, div, header, main, section, article, footer, nav, a, button, p, span, h1, h2, h3, li, ul, dl, dt, dd, label, input, textarea, figcaption):not([data-theme-motion]) { transition-duration: 300ms !important; }
+  html[data-motion="reduced"][data-theme-changing] :where(body, [data-site-shell], header, nav, article, input, textarea, [data-theme-surface]) { transition-duration: 300ms !important; }

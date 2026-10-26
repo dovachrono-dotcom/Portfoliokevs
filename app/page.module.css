@@ -7,7 +7,7 @@
 .heroRole { color: hsl(var(--foreground)); font-size: clamp(1.1rem, 1.9vw, 1.5rem); margin: 23px 0 15px; }
 .introduction { color: hsl(var(--muted-foreground)); font-size: 16px; line-height: 1.85; max-width: 43ch; margin: 0; }
 .heroActions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.heroPortrait { width: 100%; max-width: 350px; justify-self: center; transform: rotate(3deg); }
+.heroPortrait { width: 100%; max-width: 350px; justify-self: center; rotate: 3deg; }
 .heroPortrait > div { border-radius: 14px; }
 .portraitNote { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: hsl(var(--muted-foreground)); padding: 14px 2px 0; }
 .heroFootnote { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; color: hsl(var(--muted-foreground)); font-size: 12px; margin-top: 30px; }
@@ -110,7 +110,7 @@
   .heroActions { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
   .heroActions > a { min-width: 0; font-size: 13px; padding-inline: 12px; min-height: 48px; gap: 10px; white-space: nowrap; }
   .heroActions svg { flex-shrink: 0; }
-  .heroPortrait { grid-column: 2; grid-row: 1; width: 100%; max-width: none; margin: 0; transform: none; align-self: start; }
+  .heroPortrait { grid-column: 2; grid-row: 1; width: 100%; max-width: none; margin: 0; rotate: none; align-self: start; }
   .portraitNote, .heroFootnote { display: none; }
   .sectionHeading { align-items: start; padding-top: 26px; gap: 14px; flex-wrap: nowrap; }
   .sectionHeading > div { min-width: 0; }
