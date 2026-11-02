@@ -1,9 +1,10 @@
-"""Build Kevin's one-page resume in his supplied reference's format.
+"""Build Kevin's one-page resume with his approved formatting.
 
 Requires ReportLab and pypdf. Run from any directory with Python.
 Review the rendered PDF before updating the public website download.
 """
 
+import argparse
 import json
 from html import escape
 from pathlib import Path
@@ -32,17 +33,7 @@ def safe(text):
     return escape(plain(text))
 
 
-def draw_border(canvas, doc):
-    canvas.saveState()
-    canvas.setStrokeColor(colors.black)
-    width, height = doc.pagesize
-    for inset, thickness in [(25, 1.5), (30, 0.7)]:
-        canvas.setLineWidth(thickness)
-        canvas.rect(inset, inset, width - inset * 2, height - inset * 2, stroke=1, fill=0)
-    canvas.restoreState()
-
-
-def build():
+def build(output=OUTPUT):
     font_dir = Path("C:/Windows/Fonts")
     pdfmetrics.registerFont(TTFont("CVArial", str(font_dir / "arial.ttf")))
     pdfmetrics.registerFont(TTFont("CVArialBold", str(font_dir / "arialbd.ttf")))
@@ -55,7 +46,7 @@ def build():
         "body": body,
         "name": ParagraphStyle("Name", parent=body, fontName="CVArialBold", fontSize=16, leading=22),
         "intro_label": ParagraphStyle("IntroLabel", parent=body, fontName="CVArialBold", spaceBefore=14, spaceAfter=3),
-        "section": ParagraphStyle("Section", parent=body, fontName="CVArialBold", fontSize=11.5, leading=16, spaceBefore=17, spaceAfter=7),
+        "section": ParagraphStyle("Section", parent=body, fontName="CVArialBold", fontSize=11.5, leading=16, spaceBefore=13, spaceAfter=7),
         "job": ParagraphStyle("Job", parent=body, fontName="CVArialBold", leading=15),
         "bullet": ParagraphStyle("Bullet", parent=body, leftIndent=19, bulletIndent=4, bulletFontName="CVArial", bulletFontSize=10.5),
     }
@@ -117,8 +108,10 @@ def build():
         f'  {college["qualification"]}', f'  {college["period"]}', "",
     ])
     for label, school in zip(["Secondary", "Primary"], PROFILE["education"][1:]):
-        story.extend([Spacer(1, 4), p(f'<b>{label}:</b> {safe(school["school"])}', "bullet", bullet=True)])
-        markdown.extend([f'- **{label}:** {school["school"]}', ""])
+        graduation = school["period"].removeprefix("Graduated ")
+        school_text = f'<b>{label}:</b> {safe(school["school"])}<br/>Graduated: {safe(graduation)}'
+        story.extend([Spacer(1, 4), p(school_text, "bullet", bullet=True)])
+        markdown.extend([f'- **{label}:** {school["school"]}', f'  Graduated: {graduation}', ""])
 
     for index, group in enumerate(CV["skillGroups"]):
         line = p(f'<b>{safe(group["title"])}:</b> {safe(", ".join(group["skills"]))}')
@@ -136,15 +129,15 @@ def build():
             story.append(line)
         markdown.extend([f'- {cert["title"]} | {cert["issuer"]} | {cert["date"]}', ""])
 
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    output.parent.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(
-        str(OUTPUT), pagesize=letter, rightMargin=72, leftMargin=72,
-        topMargin=58, bottomMargin=54, title=f'{PROFILE["name"]} - Resume',
+        str(output), pagesize=letter, rightMargin=72, leftMargin=72,
+        topMargin=48, bottomMargin=48, title=f'{PROFILE["name"]} - Resume',
         author=PROFILE["name"], subject="Customer service, food service, office tools, and web development",
         allowSplitting=1,
     )
-    doc.build(story, onFirstPage=draw_border, onLaterPages=draw_border)
-    reader = PdfReader(str(OUTPUT))
+    doc.build(story)
+    reader = PdfReader(str(output))
     if len(reader.pages) != 1:
         raise RuntimeError(f"Expected a one-page resume; generated {len(reader.pages)} pages. Review the layout.")
     text = reader.pages[0].extract_text()
@@ -155,9 +148,11 @@ def build():
         raise RuntimeError("The supplied format should not contain hyperlinks.")
     EDITABLE.parent.mkdir(parents=True, exist_ok=True)
     EDITABLE.write_text(plain("\n".join(markdown)).rstrip() + "\n", encoding="utf-8")
-    print(f"Created one-page PDF: {OUTPUT}")
+    print(f"Created one-page PDF: {output}")
     print(f"Saved editable content: {EDITABLE}")
 
 
 if __name__ == "__main__":
-    build()
+    parser = argparse.ArgumentParser(description="Build Kevin's one-page resume.")
+    parser.add_argument("--output", type=Path, default=OUTPUT, help="PDF export path; use a new filename if an existing PDF is open.")
+    build(parser.parse_args().output.resolve())

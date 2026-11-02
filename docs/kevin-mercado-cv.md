@@ -41,8 +41,10 @@ February - June 2024
   2023 - present
 
 - **Secondary:** Cordova National High School
+  Graduated: 2020-2021
 
 - **Primary:** Cordova Central School
+  Graduated: 2016-2017
 
 ## TECHNICAL SKILLS:
 
