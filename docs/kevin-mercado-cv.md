@@ -1,55 +1,40 @@
 # Kevin C. Mercado
 
-Web & mobile developer
+Customer Service | Office Tools | Web Development
 
 Cordova, Cebu, Philippines | +63 981 251 3789 | kevinmercado987@gmail.com
 
-[Portfolio](https://diportfolionikevin.vercel.app/) | [GitHub / ultrakevin143](https://github.com/ultrakevin143) | [LinkedIn](https://www.linkedin.com/in/mercado-kevin-5957713b2/)
+[Portfolio](https://portfoliokevs.vercel.app/) | [GitHub / ultrakevin143](https://github.com/ultrakevin143) | [LinkedIn](https://www.linkedin.com/in/mercado-kevin-5957713b2/)
 
 ## Profile
 
-Fourth-year BSIT student at Cordova Public College who builds web and mobile applications. My projects include an educational medicinal-plant platform, a browser-based ID photo editor, and a camera app. I am interested in AI-assisted development and practical tools for everyday use.
+Fourth-year BSIT student with experience in catering, cashiering, food preparation, and carnival ticket sales. Skills include Microsoft Word, PowerPoint, Excel, and web development through school and personal projects.
 
-## Technical skills
+## Work experience
 
-- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend & data:** Node.js, Express, PostgreSQL, Prisma
-- **AI, search & live features:** Gemini API, RAG, pgvector, Socket.IO, Cloudinary
-- **Other project tools:** Flutter, Kotlin, CameraX, PWA
+### Head Waiter | Virtucio Caterers
 
-## Selected projects
+2023 - present
 
-### HerbalAI | Capstone thesis project
+Lead the service team in communicating with clients and providing attentive service.
 
-[herbalai.site](https://www.herbalai.site/)
+### Ticket Seller | Cinias Carnival
 
-An educational Philippine medicinal-plant library with a source-grounded AI assistant and community features.
+July - August 2026
 
-**Stack:** Next.js, Express, PostgreSQL, Prisma, Gemini API, pgvector
+Sold tickets for carnival rides.
 
-### Porma Studio | Side project
+### Fryer / Cashier (All-around) | Fry 8
 
-[porma-studio.vercel.app](https://porma-studio.vercel.app/)
+February - June 2024
 
-A browser-based ID photo editor for fitting formal attire and creating print-ready sheets, with processing kept on the user's device.
+Prepared fried food, handled cashier duties, and helped with general shop tasks.
 
-**Stack:** React, TypeScript, Vite, PWA
+## Skills
 
-### Digicam | Side project
-
-[digicam-pocket.vercel.app](https://digicam-pocket.vercel.app/)
-
-A film-inspired camera and photo editor with local projects, available as an Android beta and web edition.
-
-**Stack:** Flutter, Kotlin, CameraX
-
-### FCFS Scheduler | School project
-
-[fcfs-nine.vercel.app](https://fcfs-nine.vercel.app/)
-
-A First-Come-First-Serve scheduling visualizer with real-time Gantt charts.
-
-**Stack:** Next.js, React, Tailwind CSS
+- **Office tools:** Microsoft Word, Microsoft PowerPoint, Microsoft Excel
+- **Service & operations:** Customer service, Cashiering, Food preparation, Ticket sales, Team coordination
+- **Web development:** React, Next.js, TypeScript, Tailwind CSS
 
 ## Education & leadership
 
@@ -59,13 +44,21 @@ Cordova Public College | 2023 - present | Fourth-year student
 
 Class councilor - BSIT 4B, Cordova Public College
 
-## Experience
-
-**Head Waiter** | Virtucio Caterers | 2023 - present
-
-Lead the service team in communicating with clients and providing attentive service.
-
 ## Certifications
 
 - Creative Web Design | TESDA | June 2024
 - Cookery NC II | TESDA | March 2024
+
+## Selected web projects
+
+### HerbalAI | Capstone thesis project
+
+[herbalai.site](https://www.herbalai.site/)
+
+An educational Philippine medicinal-plant library with a source-grounded AI assistant and community features.
+
+### Porma Studio | Side project
+
+[porma-studio.vercel.app](https://porma-studio.vercel.app/)
+
+A browser-based ID photo editor for fitting formal attire and creating print-ready sheets, with processing kept on the user's device.

@@ -43,6 +43,7 @@ ITelecnaha/
 │   ├── portfolio.ts          Project list, navigation and social links
 │   ├── blog.ts               Posts, categories and media information
 │   ├── profile.json          Personal details, education, work and skills
+│   ├── cv.json               General-purpose CV wording, work and skills
 │   └── data.ts               About data, including certificates
 ├── public/                   Assets served by the website
 │   ├── projects/             Project screenshots
@@ -95,6 +96,7 @@ Plain `npm run dev` normally starts at [http://localhost:3000](http://localhost:
 | Theme colors | `app/globals.css` |
 | Header/footer | `components/common/Header.tsx`, `components/common/Footer.tsx` |
 | Downloadable CV | `public/Kevin_Mercado_CV.pdf`; see `docs/cv-maintenance.md` |
+| CV summary, practical skills and additional jobs | `lib/cv.json` |
 
 ## Add a project
 

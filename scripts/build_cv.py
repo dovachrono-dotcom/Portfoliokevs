@@ -1,4 +1,4 @@
-"""Build Kevin's text-based CV from the shared portfolio profile.
+"""Build Kevin's general-purpose CV from his profile and CV-specific content.
 
 Requires ReportLab and pypdf. Run from any directory with Python.
 The public download is updated only after reviewing the generated PDF.
@@ -20,6 +20,7 @@ from reportlab.platypus import HRFlowable, KeepTogether, Paragraph, SimpleDocTem
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = json.loads((ROOT / "lib/profile.json").read_text(encoding="utf-8"))
+CV = json.loads((ROOT / "lib/cv.json").read_text(encoding="utf-8"))
 OUTPUT = ROOT / "output/pdf/Kevin_Mercado_CV.pdf"
 EDITABLE = ROOT / "docs/kevin-mercado-cv.md"
 PROJECTS = [
@@ -57,7 +58,7 @@ PROJECTS = [
     },
 ]
 LINKS = [
-    ("Portfolio", "https://diportfolionikevin.vercel.app/"),
+    ("Portfolio", "https://portfoliokevs.vercel.app/"),
     ("GitHub / ultrakevin143", "https://github.com/ultrakevin143"),
     ("LinkedIn", "https://www.linkedin.com/in/mercado-kevin-5957713b2/"),
 ]
@@ -81,21 +82,21 @@ def build():
     pdfmetrics.registerFont(TTFont("CVArialBold", str(font_dir / "arialbd.ttf")))
     pdfmetrics.registerFontFamily("CVArial", normal="CVArial", bold="CVArialBold")
     body = ParagraphStyle(
-        "Body", fontName="CVArial", fontSize=9.6, leading=13.4,
+        "Body", fontName="CVArial", fontSize=10.2, leading=14.2,
         textColor=colors.HexColor("#202329"), alignment=TA_LEFT,
         spaceAfter=0,
     )
     styles = {
         "body": body,
         "name": ParagraphStyle("Name", parent=body, fontName="CVArialBold", fontSize=25, leading=29, textColor=colors.black),
-        "role": ParagraphStyle("Role", parent=body, fontSize=12, leading=18),
+        "role": ParagraphStyle("Role", parent=body, fontSize=10.5, leading=17),
         "meta": ParagraphStyle("Meta", parent=body, fontSize=9, leading=13.5),
         "section": ParagraphStyle("Section", parent=body, fontName="CVArialBold", fontSize=10.5, leading=14, textColor=colors.black, spaceBefore=12, spaceAfter=4),
         "project": ParagraphStyle("Project", parent=body, fontName="CVArialBold", fontSize=10, leading=14),
         "small": ParagraphStyle("Small", parent=body, fontSize=9, leading=12.5),
     }
     story = []
-    markdown = [f'# {PROFILE["name"]}', "", PROFILE["role"], "",
+    markdown = [f'# {PROFILE["name"]}', "", CV["headline"], "",
                 f'{PROFILE["location"]} | {PROFILE["phone"]["display"]} | {PROFILE["email"]}', "",
                 " | ".join(f"[{label}]({url})" for label, url in LINKS), ""]
 
@@ -109,7 +110,7 @@ def build():
 
     story.extend([
         p(safe(PROFILE["name"]), "name"),
-        p(safe(PROFILE["role"]), "role"),
+        p(safe(CV["headline"]), "role"),
         Spacer(1, 5),
         p(f'{safe(PROFILE["location"])} &nbsp; | &nbsp; {link(PROFILE["phone"]["display"], PROFILE["phone"]["href"])} &nbsp; | &nbsp; {link(PROFILE["email"], "mailto:" + PROFILE["email"])}', "meta"),
         p(" &nbsp; | &nbsp; ".join(link(label, url) for label, url in LINKS), "meta"),
@@ -117,31 +118,33 @@ def build():
         HRFlowable(width="100%", thickness=0.6, color=colors.HexColor("#9b9fa6")),
     ])
 
-    section("Profile", p(safe(PROFILE["summary"])))
-    markdown.extend([plain(PROFILE["summary"]), ""])
+    section("Profile", p(safe(CV["summary"])))
+    markdown.extend([plain(CV["summary"]), ""])
 
-    skill_lines = [
-        f'<b>{safe(group["title"])}:</b> {safe(", ".join(group["technologies"]))}'
-        for group in PROFILE["skillGroups"]
-    ]
-    skill_lines.append(f'<b>Other project tools:</b> {safe(", ".join(PROFILE["otherSkills"]))}')
-    section("Technical skills", p("<br/>".join(skill_lines)))
-    markdown.extend([f'- **{group["title"]}:** {", ".join(group["technologies"])}' for group in PROFILE["skillGroups"]])
-    markdown.extend([f'- **Other project tools:** {", ".join(PROFILE["otherSkills"])}', ""])
-
-    for index, project in enumerate(PROJECTS):
+    # Keep the existing, ongoing catering role first, then completed roles.
+    experience = [PROFILE["experience"], *CV["additionalExperience"]]
+    for index, work in enumerate(experience):
         block = [
-            p(f'{safe(project["name"])} <font name="CVArial">| {safe(project["category"])} | {link(project["host"], project["url"])}</font>', "project"),
-            p(safe(project["description"])),
-            p(f'<b>Stack:</b> {safe(project["stack"])}', "small"),
+            p(f'<b>{safe(work["role"])}</b> | {safe(work["company"])}', "project"),
+            p(safe(work["period"]), "small"),
+            p(safe(work["description"])),
         ]
         if index == 0:
-            section("Selected projects", block)
+            section("Work experience", block)
         else:
-            story.extend([Spacer(1, 7), KeepTogether(block)])
-        markdown.extend([f'### {project["name"]} | {project["category"]}', "",
-                         f'[{project["host"]}]({project["url"]})', "", project["description"], "",
-                         f'**Stack:** {project["stack"]}', ""])
+            story.extend([Spacer(1, 8), KeepTogether(block)])
+        markdown.extend([
+            f'### {work["role"]} | {work["company"]}', "",
+            work["period"], "", work["description"], "",
+        ])
+
+    skill_lines = [
+        f'<b>{safe(group["title"])}:</b> {safe(", ".join(group["skills"]))}'
+        for group in CV["skillGroups"]
+    ]
+    section("Skills", p("<br/>".join(skill_lines)))
+    markdown.extend([f'- **{group["title"]}:** {", ".join(group["skills"])}' for group in CV["skillGroups"]])
+    markdown.append("")
 
     college = PROFILE["education"][0]
     leadership = PROFILE["leadership"]
@@ -151,19 +154,29 @@ def build():
                      f'{college["school"]} | {college["period"]} | {college["detail"]}', "",
                      f'{leadership["role"]} - {leadership["organization"]}', ""])
 
-    work = PROFILE["experience"]
-    section("Experience", p(f'<b>{safe(work["role"])}</b> | {safe(work["company"])} | {safe(work["period"])}<br/>{safe(work["description"])}'))
-    markdown.extend([f'**{work["role"]}** | {work["company"]} | {work["period"]}', "", work["description"], ""])
-
     certificates = [f'{safe(cert["title"])} | {safe(cert["issuer"])} | {safe(cert["date"])}' for cert in PROFILE["certifications"]]
     section("Certifications", p("<br/>".join(certificates)))
     markdown.extend([f'- {cert["title"]} | {cert["issuer"]} | {cert["date"]}' for cert in PROFILE["certifications"]])
+    markdown.append("")
+
+    for index, name in enumerate(CV["selectedProjects"]):
+        project = next(project for project in PROJECTS if project["name"] == name)
+        block = [
+            p(f'{safe(project["name"])} <font name="CVArial">| {safe(project["category"])} | {link(project["host"], project["url"])}</font>', "project"),
+            p(safe(project["description"])),
+        ]
+        if index == 0:
+            section("Selected web projects", block)
+        else:
+            story.extend([Spacer(1, 7), KeepTogether(block)])
+        markdown.extend([f'### {project["name"]} | {project["category"]}', "",
+                         f'[{project["host"]}]({project["url"]})', "", project["description"], ""])
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(
         str(OUTPUT), pagesize=A4, rightMargin=42, leftMargin=42,
         topMargin=36, bottomMargin=34, title=f'{PROFILE["name"]} - CV',
-        author=PROFILE["name"], subject="Web and mobile developer CV",
+        author=PROFILE["name"], subject="General-purpose CV - customer service, office tools, and web development",
         allowSplitting=1,
     )
     doc.build(story)
@@ -171,7 +184,7 @@ def build():
     if pages != 1:
         raise RuntimeError(f"Expected a one-page CV; generated {pages} pages. Review the layout.")
     EDITABLE.parent.mkdir(parents=True, exist_ok=True)
-    EDITABLE.write_text(plain("\n".join(markdown)) + "\n", encoding="utf-8")
+    EDITABLE.write_text(plain("\n".join(markdown)).rstrip() + "\n", encoding="utf-8")
     print(f"Created one-page PDF: {OUTPUT}")
     print(f"Saved editable content: {EDITABLE}")
 

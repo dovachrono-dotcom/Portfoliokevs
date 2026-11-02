@@ -1,0 +1,33 @@
+{
+  "headline": "Customer Service | Office Tools | Web Development",
+  "summary": "Fourth-year BSIT student with experience in catering, cashiering, food preparation, and carnival ticket sales. Skills include Microsoft Word, PowerPoint, Excel, and web development through school and personal projects.",
+  "skillGroups": [
+    {
+      "title": "Office tools",
+      "skills": ["Microsoft Word", "Microsoft PowerPoint", "Microsoft Excel"]
+    },
+    {
+      "title": "Service & operations",
+      "skills": ["Customer service", "Cashiering", "Food preparation", "Ticket sales", "Team coordination"]
+    },
+    {
+      "title": "Web development",
+      "skills": ["React", "Next.js", "TypeScript", "Tailwind CSS"]
+    }
+  ],
+  "additionalExperience": [
+    {
+      "role": "Ticket Seller",
+      "company": "Cinias Carnival",
+      "period": "July - August 2026",
+      "description": "Sold tickets for carnival rides."
+    },
+    {
+      "role": "Fryer / Cashier (All-around)",
+      "company": "Fry 8",
+      "period": "February - June 2024",
+      "description": "Prepared fried food, handled cashier duties, and helped with general shop tasks."
+    }
+  ],
+  "selectedProjects": ["HerbalAI", "Porma Studio"]
+}
