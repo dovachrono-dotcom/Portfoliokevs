@@ -1,14 +1,10 @@
 {
-  "headline": "Customer Service | Office Tools | Web Development",
-  "summary": "Fourth-year BSIT student with experience in catering, cashiering, food preparation, and carnival ticket sales. Skills include Microsoft Word, PowerPoint, Excel, and web development through school and personal projects.",
+  "objective": "To find an opportunity where I can use my customer service, food service, and computer skills while learning new responsibilities and supporting the team.",
+  "summary": "Experience in catering service, cashiering, food preparation, and carnival ticket sales. Familiar with Microsoft Word, Excel, and PowerPoint, with hands-on experience in web development.",
   "skillGroups": [
     {
-      "title": "Office tools",
-      "skills": ["Microsoft Word", "Microsoft PowerPoint", "Microsoft Excel"]
-    },
-    {
-      "title": "Service & operations",
-      "skills": ["Customer service", "Cashiering", "Food preparation", "Ticket sales", "Team coordination"]
+      "title": "Microsoft Office",
+      "skills": ["Word", "Excel", "PowerPoint"]
     },
     {
       "title": "Web development",
@@ -28,6 +24,5 @@
       "period": "February - June 2024",
       "description": "Prepared fried food, handled cashier duties, and helped with general shop tasks."
     }
-  ],
-  "selectedProjects": ["HerbalAI", "Porma Studio"]
+  ]
 }
