@@ -12,7 +12,7 @@ The supplied classroom profile informed the education, existing catering role, a
 
 ## General-purpose revision - November 2, 2026
 
-The CV leads with service work, followed by Microsoft Office and a concise web-development skill group. Kevin confirmed Word, PowerPoint, and Excel, ticket sales for carnival rides at Cinias Carnival, and fryer/cashier/all-around work at Fry 8. The reported dates were approximately July 18 to August 18, 2026 for Cinias Carnival and February 4 to June 18, 2024 for Fry 8. The CV uses month/year ranges to reflect that uncertainty. No cash totals, sales figures, job locations, or proficiency levels were added. The existing Head Waiter role is retained from the supplied profile.
+The CV leads with service work, followed by Microsoft Office and a concise web-development skill group. Kevin confirmed Word, PowerPoint, and Excel, ticket sales for carnival rides at Cinias Carnival, and fryer/cashier/all-around work at Fry 8. The reported dates were approximately July 18 to August 18, 2026 for Cinias Carnival and February 4 to June 18, 2022 for Fry 8, using Kevin's corrected year. The CV uses month/year ranges to reflect that uncertainty. No cash totals, sales figures, job locations, or proficiency levels were added. The existing Head Waiter role is retained from the supplied profile.
 
 ## Resume layout
 

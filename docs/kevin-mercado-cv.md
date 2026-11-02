@@ -30,7 +30,7 @@ July - August 2026
 
 ### Fryer / Cashier (All-around), Fry 8
 
-February - June 2024
+February - June 2022
 
 - Prepared fried food, handled cashier duties, and helped with general shop tasks.
 
